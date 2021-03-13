@@ -1,8 +1,11 @@
+import Navbar from "./Components/Navbar"
+import SidePanel from "./Components/SidePanel"
 
-function App() {
+const App : React.FC = () => {
   return (
     <div id="Main" className="">
-     Navbar
+     <Navbar />
+     <SidePanel />
     </div>
   );
 }
