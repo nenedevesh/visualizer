@@ -7,7 +7,7 @@ const SidePanel = () => {
 
     const [doneInit, setDoneInit] = React.useState(false)
 
-    const genrateNoUiSlider = () => {      
+    const generateNoUiSlider = () => {      
        
         let slider = document.getElementById('slider')
         
@@ -30,17 +30,17 @@ const SidePanel = () => {
     const [isPanelOpen, setIsPanelOpen] = React.useState(false)
 
     React.useEffect(() => {
-        genrateNoUiSlider()
+        generateNoUiSlider()
     }, [])    
 
 
     return (
         <>
-            <div id="SidePanelClickable" className={"fixed top-2/4 " + (isPanelOpen ? `right-${panelWidth}` : "right-0")} onClick={() => setIsPanelOpen(!isPanelOpen)}>
+            <div id="SidePanelClickable" className={"z-50 fixed top-2/4 " + (isPanelOpen ? `right-${panelWidth}` : "right-0")} onClick={() => setIsPanelOpen(!isPanelOpen)}>
                 <i className={"fas fa-3x " + (isPanelOpen ? "fa-chevron-circle-right" : "fa-chevron-circle-left")} />
             </div>
-
-            <div id="SidePanel" className={"border-l-2 border-blue-300 shadow-2xl fixed h-screen " + `w-${panelWidth} `  + (isPanelOpen ?  "right-0" : `-right-${panelWidth}`)}>
+            {/*eslint-disable-next-line */}
+            <div id="SidePanel" className={"z-50  bg-gray-50 border-l-2 border-blue-300 shadow-2xl fixed h-screen " + `w-${panelWidth} `  + (isPanelOpen ?  "right-0" : `-right-${panelWidth}`)}>
                     
                     <div id="SelectorGrid">
                         <div className="grid grid-cols-3 gap-4 m-4">
