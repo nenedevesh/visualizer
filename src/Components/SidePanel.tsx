@@ -95,28 +95,28 @@ const SidePanel = () => {
                             <div>
                                 <div>Topic</div>
                                 <select name="topic" id="topic">
-
+                                    <option value="">All</option>
                                 </select>
                             </div>
 
                             <div>
                                 <div>Sector</div>
                                 <select name="sector" id="sector">
-
+                                    <option value="">All</option>
                                 </select>
                             </div>
 
                             <div>
                                 <div>Region</div>
                                 <select name="region" id="region">
-
+                                    <option value="">All</option>
                                 </select>
                             </div>
 
                             <div>
                                 <div>Pestle</div>
                                 <select name="pestle" id="pestle">
-
+                                    <option value="">All</option>
                                 </select>
                             </div>
                             
