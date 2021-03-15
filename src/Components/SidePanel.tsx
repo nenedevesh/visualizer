@@ -40,7 +40,7 @@ const SidePanel = () => {
                 <i className={"fas fa-3x " + (isPanelOpen ? "fa-chevron-circle-right" : "fa-chevron-circle-left")} />
             </div>
             {/*eslint-disable-next-line */}
-            <div id="SidePanel" className={"z-50  bg-gray-50 border-l-2 border-blue-300 shadow-2xl fixed h-screen " + `w-${panelWidth} `  + (isPanelOpen ?  "right-0" : `-right-${panelWidth}`)}>
+            <div id="SidePanel" className={"z-50  bg-gray-50 border-l-2 border-t-2 border-blue-300 shadow-2xl fixed h-screen " + `w-${panelWidth} `  + (isPanelOpen ?  "right-0" : `-right-${panelWidth}`)}>
                     
                     <div id="SelectorGrid">
                         <div className="grid grid-cols-3 gap-4 m-4">
@@ -90,63 +90,75 @@ const SidePanel = () => {
                     </div>
 
                     <div className="flex justify-evenly" >
-                        <div className="flex-col bg-pink-900 m-4 px-8" >
+                        <div className="flex-col m-4 px-8" >
                             Filter
+                            <hr />
+                            <br/>
+                            
                             <div>
-                                <div>Topic</div>
-                                <select name="topic" id="topic">
+                                <div><input disabled type="checkbox" id="topic"/> <span> <label htmlFor="topic">Topic</label></span> </div>
+                                 
+                                <select disabled name="topicC" id="topicC">
                                     <option value="">All</option>
                                 </select>
                             </div>
 
                             <div>
-                                <div>Sector</div>
-                                <select name="sector" id="sector">
+                                <div><input disabled type="checkbox" id="sector"/> <span> <label htmlFor="sector">Sector</label></span> </div>
+
+                                <select disabled name="sectorC" id="sectorC">
                                     <option value="">All</option>
                                 </select>
                             </div>
 
                             <div>
-                                <div>Region</div>
-                                <select name="region" id="region">
+                                <div><input disabled type="checkbox" id="region"/> <span> <label htmlFor="region">Region</label></span> </div>
+
+                                <select disabled name="regionC" id="regionC">
                                     <option value="">All</option>
                                 </select>
                             </div>
 
                             <div>
-                                <div>Pestle</div>
-                                <select name="pestle" id="pestle">
+                                <div><input disabled type="checkbox" id="pestle"/> <span> <label htmlFor="pestle">Pestle</label></span> </div>
+
+                                <select disabled name="pestle" id="pestle">
                                     <option value="">All</option>
                                 </select>
                             </div>
                             
                         </div>
-                        <div className="flex-col bg-green-900 m-4 px-4" >
+                        <div className="flex-col m-4 px-4" >
                             
                             <div>
                                 <div>Measure</div>
+                                <hr />
+                                <br />
                                 <select name="measure" id="measure">
-                                
+                                <option id="relevance">Relevance</option>
+                                <option id="likelihood">Likelihood</option>
+                                <option id="impact">Impact</option>
+                                <option id="intensity">Intensity</option>
                                 </select>
                             </div>
 
                             <div>
                                 <div>Source</div>
-                                <select name="source" id="source">
+                                <select disabled name="source" id="source">
                                 
                                 </select>
                             </div>
 
                             <div>
                                 <div>SWOT</div>
-                                <select name="swot" id="swot">
+                                <select disabled name="swot" id="swot">
                                 
                                 </select>
                             </div>
 
                             <div>
                                 <div>Confidence</div>
-                                <select name="confidence" id="confidence">
+                                <select disabled name="confidence" id="confidence">
                                 
                                 </select>
                             </div>
