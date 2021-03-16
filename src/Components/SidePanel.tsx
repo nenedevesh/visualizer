@@ -1,11 +1,44 @@
 import React from "react"
 import noUiSlider from 'nouislider'
+import { ChartState } from "../GlobalState/ChartState"
+
+interface mapElement {
+    added : string
+    country : string
+    end_year : number
+    impact : number
+    insight : string
+    intensity : number
+    likelihood : number
+    pestle : string
+    published : string
+    region : string
+    relevance : number
+    sector: string
+    source : string
+    start_year : number
+    title: string
+    topic: string
+    url : string
+}
+
+interface mapElementMin {
+    impact : number
+    intensity : number
+    likelihood : number
+    relevance : number
+    sector: string
+}
 
 const panelWidth = 96
 
 const SidePanel = () => {
 
     const [doneInit, setDoneInit] = React.useState(false)
+
+    const {chartData, setChartData} = React.useContext(ChartState)
+
+    const [data, setData] = React.useState<mapElementMin[]>([])
 
     const generateNoUiSlider = () => {      
        
@@ -21,15 +54,196 @@ const SidePanel = () => {
                 }
             });
             setDoneInit(true)
+        }else if(doneInit) {
+            console.log("Slider already initialized")
         }else {
-            console.error("Element with id Slider Not Found")
+            console.error("Element with id slider not found")
         }
 
+    }
+
+    const fetchData = () => {
+        fetch("/api").then(rawData => {
+            rawData.json().then(jsonData => {
+                let array : mapElement[] = jsonData
+
+                let arrayMin : mapElementMin[] = array.map((elm,index) => {
+                    return {"impact" : elm.impact, "intensity" : elm.intensity, "likelihood" : elm.likelihood, "relevance" : elm.relevance, "sector" : elm.sector  }
+                })
+
+                setData(arrayMin)
+
+                let relevance : number[] = arrayMin.map((elm,index) => {
+                    return elm.relevance
+                })
+
+                setChartData({
+                    labels: [
+                        "Energy",
+                        "Environment",
+                        "Government",
+                        "Aerospace & defence",
+                        "Manufacturing",
+                        "Retail",
+                        "Financial services",
+                        "Support services",
+                        "Information Technology",
+                        "Healthcare",
+                        "Food & agriculture",
+                        "Automotive",
+                        "Tourism & hospitality",
+                        "Construction",
+                        "Security",
+                        "Transport",
+                        "Water",
+                        "Media & entertainment"
+                    ],
+                    datasets: [{
+                        label: 'Relevance',
+                        data: relevance,
+                        borderWidth: 1
+                    }]
+                })
+            })
+        })
+    }
+
+    const toggleFunc = (event : React.ChangeEvent<HTMLSelectElement>) => {
+        if(event.currentTarget.value === "Likelihood"){
+            let measure : number[] = data.map((elm,index) => {
+                return elm.likelihood
+            })
+
+            setChartData({
+                labels: [
+                    "Energy",
+                    "Environment",
+                    "Government",
+                    "Aerospace & defence",
+                    "Manufacturing",
+                    "Retail",
+                    "Financial services",
+                    "Support services",
+                    "Information Technology",
+                    "Healthcare",
+                    "Food & agriculture",
+                    "Automotive",
+                    "Tourism & hospitality",
+                    "Construction",
+                    "Security",
+                    "Transport",
+                    "Water",
+                    "Media & entertainment"
+                ],
+                datasets: [{
+                    label: 'Relevance',
+                    data: measure,
+                    borderWidth: 1
+                }]
+            })
+        }else if (event.currentTarget.value === "Impact"){
+            let measure : number[] = data.map((elm,index) => {
+                return elm.impact
+            })
+
+            setChartData({
+                labels: [
+                    "Energy",
+                    "Environment",
+                    "Government",
+                    "Aerospace & defence",
+                    "Manufacturing",
+                    "Retail",
+                    "Financial services",
+                    "Support services",
+                    "Information Technology",
+                    "Healthcare",
+                    "Food & agriculture",
+                    "Automotive",
+                    "Tourism & hospitality",
+                    "Construction",
+                    "Security",
+                    "Transport",
+                    "Water",
+                    "Media & entertainment"
+                ],
+                datasets: [{
+                    label: 'Relevance',
+                    data: measure,
+                    borderWidth: 1
+                }]
+            })
+        }else if (event.currentTarget.value === "Intensity"){
+                let measure : number[] = data.map((elm,index) => {
+                    return elm.intensity
+                })
+    
+                setChartData({
+                    labels: [
+                        "Energy",
+                        "Environment",
+                        "Government",
+                        "Aerospace & defence",
+                        "Manufacturing",
+                        "Retail",
+                        "Financial services",
+                        "Support services",
+                        "Information Technology",
+                        "Healthcare",
+                        "Food & agriculture",
+                        "Automotive",
+                        "Tourism & hospitality",
+                        "Construction",
+                        "Security",
+                        "Transport",
+                        "Water",
+                        "Media & entertainment"
+                    ],
+                    datasets: [{
+                        label: 'Relevance',
+                        data: measure,
+                        borderWidth: 1
+                    }]
+                })
+            }else if (event.currentTarget.value === "Relevance"){
+                let measure : number[] = data.map((elm,index) => {
+                    return elm.relevance
+                })
+    
+                setChartData({
+                    labels: [
+                        "Energy",
+                        "Environment",
+                        "Government",
+                        "Aerospace & defence",
+                        "Manufacturing",
+                        "Retail",
+                        "Financial services",
+                        "Support services",
+                        "Information Technology",
+                        "Healthcare",
+                        "Food & agriculture",
+                        "Automotive",
+                        "Tourism & hospitality",
+                        "Construction",
+                        "Security",
+                        "Transport",
+                        "Water",
+                        "Media & entertainment"
+                    ],
+                    datasets: [{
+                        label: 'Relevance',
+                        data: measure,
+                        borderWidth: 1
+                    }]
+                })
+            }
     }
 
     const [isPanelOpen, setIsPanelOpen] = React.useState(false)
 
     React.useEffect(() => {
+        fetchData()
         generateNoUiSlider()
     }, [])    
 
@@ -134,11 +348,11 @@ const SidePanel = () => {
                                 <div>Measure</div>
                                 <hr />
                                 <br />
-                                <select name="measure" id="measure">
-                                <option id="relevance">Relevance</option>
-                                <option id="likelihood">Likelihood</option>
-                                <option id="impact">Impact</option>
-                                <option id="intensity">Intensity</option>
+                                <select name="measure" id="measure" onChange={toggleFunc}>
+                                    <option id="relevance">Relevance</option>
+                                    <option id="likelihood">Likelihood</option>
+                                    <option id="impact">Impact</option>
+                                    <option id="intensity">Intensity</option>
                                 </select>
                             </div>
 

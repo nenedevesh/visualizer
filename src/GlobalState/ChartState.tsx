@@ -24,7 +24,7 @@ const initialMapData = {
         "Media & entertainment"
     ],
     datasets: [{
-        label: '# of Votes',
+        label: 'Relevance',
         data: [12, 19, 10, 5, 2, 3],
         borderWidth: 1
     }]
